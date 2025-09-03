@@ -1,0 +1,71 @@
+openapi: 3.0.3
+info:
+  title: STD24191
+  description: This is aspecification of STD24191
+  version: 1.0.0
+servers:
+  - url:
+    description: Local development server
+paths:
+  /health:
+    get:
+      summary: Check if the api is online
+      responses:
+        "200":
+          description: Returns 200 OK with the plain text "Ok"
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Ok"
+
+  /phones:
+    post:
+      post:
+      summary: create list of phone
+      operationId: createPhone
+      requestBody:
+        description: List of phone to create
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Phones"
+            example:
+              - identifier: 2
+                brand: Brand
+              - identifier: 3
+                title: Second brand
+                completed: false
+      responses:
+        "201":
+          description: List of phone was created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Phones"
+  /phones/{id}:
+
+components:
+  schemas:
+    Phones:
+      type: object
+      properties:
+        identifier:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: Faire les courses
+        model:
+          type: string
+          example: false
+        characteristics:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Characteristic"

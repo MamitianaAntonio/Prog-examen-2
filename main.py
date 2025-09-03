@@ -20,7 +20,7 @@ class Characteristic(BaseModel):
 info_store: List[ListModal] = []
 
 def serialized_stored_events():
-    return [event.model_dump() for info in info_store]
+    return [info.model_dump() for info in info_store]
 
 @app.get("/health")
 async def getHealth ():
@@ -38,3 +38,8 @@ async def postPhones (event_payload: List[ListModal]):
 @app.get("/phones")
 async def getPhones () -> Response:
     return JSONResponse(content=serialized_stored_events(), status_code="200") 
+
+
+@app.get("/phones/{id}")
+async def getPhoneId ()
+
