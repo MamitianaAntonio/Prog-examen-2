@@ -34,3 +34,7 @@ async def postPhones (event_payload: List[ListModal]):
         status_code=201,
         media_type="application/json",
     )
+
+@app.get("/phones")
+async def getPhones () -> Response:
+    return JSONResponse(content=serialized_stored_events(), status_code="200") 
